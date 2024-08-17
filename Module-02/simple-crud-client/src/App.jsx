@@ -1,6 +1,7 @@
-import './App.css';
+import 'react';
+import { Link } from 'react-router-dom';
 
-function App() {
+const App = () => {
 
   const handleAddUser = event => {
     event.preventDefault();
@@ -26,6 +27,7 @@ function App() {
     })
     .then(data => {
       console.log(data);
+      form.reset();
     })
     .catch(error => {
       console.error('There was a problem with the fetch operation:', error);
@@ -42,6 +44,8 @@ function App() {
         <input type="email" name="email" placeholder="Email" />
         <br />
         <input type="submit" value="Add User" />
+        <br />
+        <Link to='/users'>Users</Link>
       </form>
     </>
   );
