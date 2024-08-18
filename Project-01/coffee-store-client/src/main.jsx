@@ -4,6 +4,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import App from './App';
 import AddCoffee from './Components/AddCoffee/AddCoffee';
 import UpdateCoffee from './Components/UpdateCoffee/UpdateCoffee';
 import './index.css';
@@ -11,10 +12,10 @@ import './index.css';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <App/>,
   },
   {
-    path: 'add',
+    path: '/add',
     element: <AddCoffee/>
   },
   {

@@ -10,4 +10,9 @@ export default {
   plugins: [
     require('daisyui'),
   ],
+  daisyui: {
+    themes: false, // Disable all themes if you want full control
+    // OR
+    darkTheme: false, // Prevent DaisyUI from applying dark mode
+  },
 }
