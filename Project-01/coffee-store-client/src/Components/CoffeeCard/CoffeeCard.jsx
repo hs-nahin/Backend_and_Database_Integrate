@@ -20,11 +20,11 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       if (result.isConfirmed) {
         console.log('Delete Confirmed');
         
-        // Swal.fire({
-        //   title: "Deleted!",
-        //   text: "Your file has been deleted.",
-        //   icon: "success"
-        // });
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
       }
     });
     
