@@ -56,7 +56,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
           <button className="btn btn-outline border-gray-800 text-gray-800 w-full">
             View
           </button>
-          <Link to={`updateCoffee/${_id}`} className="w-full">
+          <Link to={`update/${_id}`} className="w-full">
             <button className="btn btn-outline border-gray-800 text-gray-800 w-full">
               Edit
             </button>
