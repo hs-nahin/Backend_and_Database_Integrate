@@ -15,33 +15,39 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log('Delete Confirmed');
-        
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
+        console.log("Delete Confirmed");
+        fetch(`http://localhost:5000/coffee/${_id}`, {
+          method: 'DELETE'
+        })
+          .then((res) => res.json())
+          .then(data => {
+            if (data.deletedCount > 0) {
+              console.log(data);
+              
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Coffee has been deleted.",
+                icon: "success"
+              });
+            }
+          });
       }
     });
-    
   };
 
   return (
     <div className="card flex flex-col lg:flex-row bg-white shadow-lg rounded-lg overflow-hidden transition-transform ease-in-out duration-300 transform hover:scale-105">
       <figure className="w-full lg:w-1/3 h-48 lg:h-auto overflow-hidden">
-        <img
-          src={photo}
-          alt={name}
-          className="object-cover w-full h-full"
-        />
+        <img src={photo} alt={name} className="object-cover w-full h-full" />
       </figure>
       <div className="flex flex-col lg:flex-row justify-between w-full p-4 lg:p-6">
         <div className="flex flex-col space-y-2 lg:w-2/3">
-          <h2 className="text-xl lg:text-2xl font-bold text-gray-800">Name: {name}</h2>
+          <h2 className="text-xl lg:text-2xl font-bold text-gray-800">
+            Name: {name}
+          </h2>
           <p className="text-gray-600">Quantity: {quantity}</p>
           <p className="text-gray-600">Supplier: {supplier}</p>
           <p className="text-gray-600">Taste: {taste}</p>

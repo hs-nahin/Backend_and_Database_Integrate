@@ -12,7 +12,7 @@ const AddCoffee = () => {
         const category = form.category.value;
         const details = form.details.value;
         const photo = form.photo.value;
-
+        form.reset();
         const newCoffee = {name, quantity, supplier, taste, category, details, photo}
         console.log(newCoffee);
 
