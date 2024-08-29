@@ -49,9 +49,8 @@ async function run() {
     app.put("/coffee/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
       const updatedCoffee = req.body;
-      console.log("Received for update:", updatedCoffee);
-    
       const coffee = {
         $set: {
           name: updatedCoffee.name,
@@ -63,24 +62,11 @@ async function run() {
           photo: updatedCoffee.photo,
         },
       };
-    
-      try {
-        const result = await coffeeCollection.updateOne(filter, coffee, { upsert: false });
-        console.log("Update Result:", result);
-    
-        if (result.modifiedCount === 0) {
-          return res.status(404).send({ message: "No document found or no changes detected" });
-        }
-    
-        res.send(result);
-      } catch (error) {
-        console.error("Error updating document:", error);
-        res.status(500).send({ message: "Failed to update document" });
-      }
+      const result = await coffeeCollection.updateOne(filter, coffee, options);
+      res.send(result);
     });
+
     
-
-
     app.post("/coffee", async (req, res) => {
       const newCoffee = req.body;
       console.log(newCoffee);
