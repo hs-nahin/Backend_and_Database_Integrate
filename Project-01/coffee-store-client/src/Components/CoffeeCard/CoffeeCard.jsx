@@ -6,8 +6,6 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { _id, name, quantity, supplier, taste, photo } = coffee;
 
   const handleDelete = (_id) => {
-    console.log(_id);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -18,22 +16,33 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log("Delete Confirmed");
         fetch(`http://localhost:5000/coffee/${_id}`, {
-          method: 'DELETE'
+          method: "DELETE",
         })
           .then((res) => res.json())
-          .then(data => {
-            console.log(data);
+          .then((data) => {
             if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",
                 text: "Your Coffee has been deleted.",
-                icon: "success"
+                icon: "success",
               });
-              const remaining = coffees.filter(cof => cof._id !== _id)
-              setCoffees(remaining);
+              
+              // Update state by creating a new array with the remaining items
+              const updatedCoffees = coffees.filter((cof) => cof._id !== _id);
+              setCoffees(updatedCoffees);
+
+              // Additional force re-render by using a secondary state (optional)
+              setCoffees(prev => [...updatedCoffees]); // Ensure a fresh array reference
             }
+          })
+          .catch((error) => {
+            console.error("Error deleting coffee:", error);
+            Swal.fire({
+              title: "Error!",
+              text: "There was an issue deleting the coffee. Please try again.",
+              icon: "error",
+            });
           });
       }
     });
