@@ -11,9 +11,6 @@ console.log(process.env.DB_USER);
 app.use(cors());
 app.use(express.json());
 
-// CoffeeStore
-// 5ZKejPZxQTQNSrwk
-
 // ...................
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cvmgo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
@@ -49,7 +46,6 @@ async function run() {
     app.put("/coffee/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
-      const options = { upsert: true };
       const updatedCoffee = req.body;
       const coffee = {
         $set: {
@@ -62,9 +58,10 @@ async function run() {
           photo: updatedCoffee.photo,
         },
       };
-      const result = await coffeeCollection.updateOne(filter, coffee, options);
+      const result = await coffeeCollection.updateOne(filter, coffee);
       res.send(result);
     });
+    
 
     
     app.post("/coffee", async (req, res) => {

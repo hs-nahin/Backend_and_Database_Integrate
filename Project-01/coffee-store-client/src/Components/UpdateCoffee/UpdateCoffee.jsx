@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UpdateCoffee = () => {
@@ -32,7 +32,7 @@ const UpdateCoffee = () => {
     console.log(updatedCoffee);
 
     // Send data to the server
-    fetch(`https://coffee-store-server-74xiae2di-jhankarphero.vercel.app/coffee/${_id}`, {
+    fetch(`http://localhost:5000/coffee/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -71,6 +71,7 @@ const UpdateCoffee = () => {
 
   return (
     <div className="bg-[#F4F3F0] p-24">
+      <Link to='/'><button class="btn btn-outline btn-error">Home</button></Link>
       <h2 className="text-3xl font-extrabold">Update Coffee: {name}</h2>
       <form onSubmit={handleUpdateCoffee}>
         {/* form name and quantity row */}
