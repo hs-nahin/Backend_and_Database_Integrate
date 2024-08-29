@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 const AddCoffee = () => {
@@ -40,6 +41,7 @@ const AddCoffee = () => {
     }
   return (
     <div className="bg-[#F4F3F0] p-24">
+      <Link to='/'><button class="btn btn-outline btn-error">Home</button></Link>
       <h2 className="text-3xl font-extrabold">Add a Coffee</h2>
       <form onSubmit={handleAddCoffee}>
         {/* form name and quantity row */}
