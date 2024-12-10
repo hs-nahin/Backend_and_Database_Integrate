@@ -1,10 +1,14 @@
+import { Route, Routes } from 'react-router'
 import './App.css'
+import Main from './Layout/Main'
 
 function App() {
 
   return (
     <>
-    <h1>hello guys</h1>
+    <Routes>
+      <Route path='/' element={<Main/>}></Route>
+    </Routes>
     </>
   )
 }
